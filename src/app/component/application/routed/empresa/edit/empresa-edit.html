@@ -1,0 +1,89 @@
+
+<app-menu></app-menu>
+
+<div class="container my-3">
+
+  <app-header [title]="'Edición de ' + strTitleSingular">
+  </app-header>
+  <div class="row justify-content-center">
+
+    <form novalidate [formGroup]="oForm" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-3">
+        <label for="id" class="col-sm-2 col-form-label">  ID</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" placeholder="{{id}}" readonly>
+        </div>
+      </div>
+
+     <div class="row mb-3">
+        <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="nombre" formControlName="nombre"
+            [ngClass]="{'is-valid' : f.nombre.dirty && !(f.nombre.errors?.required || f.nombre.errors?.minlength) }">
+          <div *ngIf="['f.nombre.dirty'] && ['f.nombre.errors?.required']" class="text-danger">
+            Se debe introducir un nombre
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="telefono" formControlName="telefono" min="9"
+                [ngClass]="{'is-valid' : f.telefono.dirty && !(f.telefono.errors?.required) }">
+            <div *ngIf="f.telefono.dirty && f.telefono.errors?.required" class="text-danger">
+                Se debe introducir un telefono
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="direccion" formControlName="direccion"
+            [ngClass]="{'is-valid' : f.telefono.dirty && !(f.direccion.errors?.required || f.direccion.errors?.minlength) }">
+          <div *ngIf="f.telefono.dirty && f.direccion.errors?.required" class="text-danger">
+            Se debe introducir una direccion
+          </div>
+          
+        </div>
+      </div>
+
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="email" formControlName="email"
+                [ngClass]="{'is-valid' : f.email.dirty && !(f.email.errors?.required || f.email.errors?.minlength) }">
+              <div *ngIf="f.email.dirty && f.email.errors?.required" class="text-danger">
+                Se debe introducir un email
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      
+
+      <div class="row mb-3 justify-content-center">
+        <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center">
+          <button type="submit" class="btn btn-warning" [disabled]="oForm.invalid || oForm.pristine">Modificar
+            la {{strTitleSingular}}</button>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center mt-5">
+      <a class="btn btn-primary mx-2" [routerLink]="['/home']"> Página
+        principal</a>
+      <a class="btn btn-primary mx-2" [routerLink]="['/' + strEntity + '/plist']"> Listado de {{strTitlePlural}}</a>
+      <a class="btn btn-primary mx-2" (click)="goBack()"> Volver
+      </a>
+    </div>
+
+    
+
+
+    <app-popup [show]="eventsSubjectShowPopup.asObservable()" [body]="strResult" (close)="onClosePopup()" [size]="'sm'">
+    </app-popup>

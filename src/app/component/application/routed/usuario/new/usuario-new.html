@@ -1,0 +1,134 @@
+<app-menu></app-menu>
+
+<div class="container my-3">
+
+  <app-header [title]="'Nuevo ' + strTitleSingular">
+  </app-header>
+  <div class="row justify-content-center">
+
+    <form novalidate [formGroup]="oForm" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-3">
+        <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                [ngClass]="{'is-valid' : f.nombre.dirty && !(f.nombre.errors?.required || f.nombre.errors?.minlength) }">
+              <div *ngIf="f.nombre.dirty && f.nombre.errors?.required" class="text-danger">
+                Se debe introducir un nombre
+              </div>
+              <div *ngIf="f.nombre.dirty && f.nombre.errors?.minlength" class="text-danger">
+                El nombre introducido es demasiado corto
+              </div>
+            </div>
+          </div>
+        </div>
+        <label for="apellido1" class="col-sm-2 col-form-label">Primer Apellido</label>
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="apellido1" formControlName="apellido1"
+                [ngClass]="{'is-valid' : f.apellido1.dirty && !(f.apellido1.errors?.required || f.apellido1.errors?.minlength) }">
+              <div *ngIf="f.apellido1.dirty && f.apellido1.errors?.required" class="text-danger">
+                Se debe introducir un Primer Apellido
+              </div>
+              <div *ngIf="f.apellido1.dirty && f.apellido1.errors?.minlength" class="text-danger">
+                El Primer Apellido introducido es demasiado corto
+              </div>
+            </div>
+          </div>
+        </div>
+        <label for="apellido2" class="col-sm-2 col-form-label">Segundo Apellido</label>
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="apellido2" formControlName="apellido2"
+                [ngClass]="{'is-valid' : f.apellido2.dirty && !(f.apellido2.errors?.required || f.apellido2.errors?.minlength) }">
+              <div *ngIf="f.apellido2.dirty && f.apellido2.errors?.required" class="text-danger">
+                Se debe introducir un Segundo Apellido
+              </div>
+              <div *ngIf="f.apellido2.dirty && f.apellido2.errors?.minlength" class="text-danger">
+                El Segundo Apellido introducido es demasiado corto
+              </div>
+            </div>
+          </div>
+        </div>
+        <label for="login" class="col-sm-2 col-form-label">Login</label>
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="login" formControlName="login"
+                [ngClass]="{'is-valid' : f.login.dirty && !(f.login.errors?.required || f.login.errors?.minlength) }">
+              <div *ngIf="f.login.dirty && f.login.errors?.required" class="text-danger">
+                Se debe introducir un Login
+              </div>
+              <div *ngIf="f.login.dirty && f.login.errors?.minlength" class="text-danger">
+                El Login introducido es demasiado corto
+              </div>
+            </div>
+          </div>
+        </div>
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="email" formControlName="email"
+                [ngClass]="{'is-valid' : f.email.dirty && !(f.email.errors?.required || f.email.errors?.minlength) }">
+              <div *ngIf="f.email.dirty && f.email.errors?.required" class="text-danger">
+                Se debe introducir un email
+              </div>
+              <div *ngIf="f.email.dirty && f.email.errors?.minlength" class="text-danger">
+                El email introducido es demasiado corto
+              </div>
+            </div>
+          </div>
+        </div>
+        <label for="tusuario" class="col-sm-2 col-form-label">Tipo Usuario</label>
+
+        <div class="col-sm-10">
+          <div class="row mb-3">
+                <label for="tusuario" class="col-sm-2 col-form-label"> Tipo</label>
+
+                <div class="col-sm-5">
+                    <div class="input-group">
+                        <span class="input-group-text">{{dataToShow?.nombre}}</span>
+                        <input type="number" class="form-control" id="tusuario" formControlName="tusuario"
+                            (ngModelChange)="onChangeTUsuario($event)">
+                        <button type="button" class="btn btn-success" (click)="openModal()">Buscar tipo usuario</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+      </div>
+
+      <div class="row mb-3 justify-content-center">
+        <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center">
+          <button type="submit" class="btn btn-warning" [disabled]="oForm.invalid || oForm.pristine">Crear
+            el {{strTitleSingular}}</button>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="control-group text-center mt-5">
+      <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center">
+        <a class="btn btn-primary mx-2" [routerLink]="['/home']"><i class="fas fa-home"></i> Página
+          principal</a>
+        <a class="btn btn-primary mx-2" [routerLink]="['/plist']"><i class="fas fa-file-alt"></i> Listado de
+          Posts</a>
+        <a class="btn btn-primary mx-2" (click)="goBack()"><i class="fas fa-arrow-circle-left"></i> Volver </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-modal [show]="eventsSubjectShowModal.asObservable()" [size]="'xl'" [hide]="eventsSubjectHideModal.asObservable()"
+    (close)="onCloseModal()">
+        <header></header>        
+</app-modal>
+
+<app-popup [show]="eventsSubjectShowPopup.asObservable()" [body]="strResult" (close)="onClosePopup()"></app-popup>

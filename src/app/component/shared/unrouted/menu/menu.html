@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"> Paquexprés</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/home'" aria-current="page"
+                            [routerLink]="['/home']">
+                            Página principal</a>
+                    </small>
+                </li>
+                <li class="nav-item" *ngIf="oUsuarioSession?.tipousuario.id==1">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/usuario/plist'"
+                            [routerLink]="['/usuario/plist']">
+                            Usuarios</a>
+                    </small>
+                </li>
+                <li class="nav-item" *ngIf="oUsuarioSession?.tipousuario.id==1">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/tipousuario/plist'"
+                            [routerLink]="['/tipousuario/plist']"> Tipos de Usuario</a>
+                    </small>
+                </li>
+                <li class="nav-item" *ngIf="oUsuarioSession?.tipousuario.id==1">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/empresa/plist'"
+                            [routerLink]="['/empresa/plist']">
+                            Empresas</a>
+                    </small>
+                </li>
+                <li class="nav-item" *ngIf="oUsuarioSession?.tipousuario.id==1">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/paquete/plist'"
+                            [routerLink]="['/paquete/plist']"> Paquetes</a>
+                    </small>
+                </li>
+                
+                <li class="nav-item" *ngIf="oUsuarioSession?.tipousuario.id==1">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/random/load'" [routerLink]="['/random/load']"> Carga aleatoria</a>
+                    </small>
+                </li>
+              
+               
+            </ul>
+
+            
+
+            <span class="navbar-text" *ngIf="oUsuarioSession"> 
+                <small> {{oUsuarioSession.nombre + " " + oUsuarioSession.apellido1 + " (" +
+                    oUsuarioSession.tipousuario.nombre+")"}}</small>
+            </span>
+
+            <span class="navbar-text" *ngIf="!oUsuarioSession">
+                <small>
+                    <a class="nav-link" [class.active]="strUrl=='/login'" [routerLink]="['/login']">Login</a>
+                </small>
+            </span>
+
+            <span class="navbar-text" *ngIf="oUsuarioSession">
+                <small>
+                    <a class="nav-link" [class.active]="strUrl=='/logout'" [routerLink]="['/logout']"> Logout</a>
+                </small>
+            </span>
+
+        </div>
+    </div>
+</nav>
